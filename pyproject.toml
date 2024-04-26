@@ -1,0 +1,62 @@
+[project]
+name = "statbootstrap"
+dynamic = ["version"]
+authors = [
+    {name="Michael Hooreman", email="mhooreman@icloud.com"},
+]
+description = "A small example package"
+readme = "README.md"
+requires-python = ">=3.11"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Healthcare Industry",
+    "Intended Audience :: Information Technology",
+    "Intended Audience :: Manufacturing",
+    "Intended Audience :: Science/Research",
+    "Topic :: Scientific/Engineering :: Information Analysis",
+    "Topic :: Scientific/Engineering :: Mathematics",
+]
+dependencies = [
+    "numpy>=1.26.0",
+    "pandas>=2.2.0",
+]
+licence = {file = "LICENSE"}
+keywords = ["statistics", "bootstrap", "numpy", "pandas"]
+
+[project.optional-dependencies]
+dev = [
+]
+
+[project.urls]
+Homepage = "https://github.com/mhooreman/statbootstrap"
+Issues = "https://github.com/mhooreman/statbootstrap/issues"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.version]
+path = "src/statbootstrap/__init__.py"
+
+[tool.ruff]
+line-length = 79
+show-fixes = true
+#show-source = true
+
+[tool.ruff.lint]
+select = ["ALL", ]
+ignore = [
+    "ANN",
+    "COM812", "ISC001",
+    "D203", "D212",
+    "TID252",
+]
+
+[tool.ruff.format]
+docstring-code-format = true
+
