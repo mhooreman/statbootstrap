@@ -1,10 +1,24 @@
+# This pyproject file is intended to be used with:
+# - hatchling for backageing
+# - ruff for linting
+
+# Hatchling
+# https://packaging.python.org/en/latest/guides/writing-pyproject-toml/
+# https://github.com/mhooreman/immorep/issues/4
+
+[metadata]
+version = "attr: package.__version__"
+
 [project]
 name = "statbootstrap"
 dynamic = ["version"]
+maintainers = [
+    {name="Michael Hooreman", email="mhooreman@icloud.com"},
+]
 authors = [
     {name="Michael Hooreman", email="mhooreman@icloud.com"},
 ]
-description = "A small example package"
+description = "Statistical bootsrap implementation"
 readme = "README.md"
 requires-python = ">=3.11"
 classifiers = [
@@ -35,6 +49,9 @@ dev = [
 [project.urls]
 Homepage = "https://github.com/mhooreman/statbootstrap"
 Issues = "https://github.com/mhooreman/statbootstrap/issues"
+#Documentation = "https://readthedocs.org"
+#Repository = "https://github.com/me/spam.git"
+#Changelog = "https://github.com/me/spam/blob/master/CHANGELOG.md"
 
 [build-system]
 requires = ["hatchling"]
@@ -43,20 +60,122 @@ build-backend = "hatchling.build"
 [tool.hatch.version]
 path = "src/statbootstrap/__init__.py"
 
-[tool.ruff]
-line-length = 79
-show-fixes = true
-#show-source = true
-
-[tool.ruff.lint]
-select = ["ALL", ]
-ignore = [
-    "ANN",
-    "COM812", "ISC001",
-    "D203", "D212",
-    "TID252",
+[tool.hatch.envs.default]
+dependencies = [
+    "notebook",
+    "ruff"
 ]
 
-[tool.ruff.format]
-docstring-code-format = true
+[tool.ruff]
+line-length = 79  # pep8
+preview = true  # Needed if you want to evable CPY DOC and/or FAST
+src = ['src', ]
 
+[tool.ruff.lint]
+dummy-variable-rgx = "^_$" #  Only ignore variables named "_"
+task-tags = ["TODO", ]  # XXX and FIXME are discouraged by some rules
+
+select = [
+    "N",  # pep8-naming
+    "D",  # pydocstyle
+    "F",  # Pyflakes
+    "E",  #E/W pycodestyle
+    "W",  #E/W pycodestyle
+    "C90",  # mccabe
+    "I",  # isort
+    "UP",  # pyupgrade
+    "YTT",  # flake8-2020
+    "ANN",  # flake8-annotations
+    "ASYNC",  # flake8-async
+    "S",  # flake8-bandit
+    "BLE",  # flake8-blind-except
+    "FBT",  # flake8-boolean-trap
+    "B",  # flake8-bugbear
+    "A",  # flake8-builtins
+    "COM",  # flake8-commas
+    "C4",  # flake8-comprehensions
+    "DTZ",  # flake8-datetimez
+    "T10",  # flake8-debugger
+    "DJ",  # flake8-django
+    "EM",  # flake8-errmsg
+    "EXE",  # flake8-executable
+    "FA",  # flake8-future-annotations
+    "ISC",  # flake8-implicit-str-concat
+    "ICN",  # flake8-import-conventions
+    "LOG",  # flake8-logging
+    "G",  # flake8-logging-format
+    "INP",  # flake8-no-pep420
+    "PIE",  # flake8-pie
+    "T20",  # flake8-print
+    "PYI",  # flake8-pyi
+    "PT",  # flake8-pytest-style
+    "Q",  # flake8-quotes
+    "RSE",  # flake8-raise
+    "RET",  # flake8-return
+    "SLF",  # flake8-self
+    "SLOT",  # flake8-slots
+    "SIM",  # flake8-simplify
+    "TID",  # flake8-tidy-imports
+    "TCH",  # flake8-type-checking
+    "INT",  # flake8-gettext
+    "ARG",  # flake8-unused-arguments
+    "PTH",  # flake8-use-pathlib
+    "TD",  # flake8-todos
+    "FIX",  # flake8-fixme
+    "ERA",  # eradicate
+    "PD",  # pandas-vet
+    "PGH",  # pygrep-hooks
+    "PL",  # Pylint
+    "TRY",  # tryceratops
+    "FLY",  # flynt
+    "NPY",  # NumPy-specific rules
+    "AIR",  # Airflow
+    "PERF",  # Perflint
+    "FURB",  # refurb
+    "RUF",  # Ruff-specific rules
+    "CPY",  # flake8-copyright - only in preview mode
+    # "FAST",  # FastAPI - only in preview mode
+    # "DOC",  # pydoclint - only in preview mode
+]
+
+ignore = [
+    # Documentation TODO
+    "D100",  # Missing docstring in public module
+    "D101",  # Missing docstring in public class
+    "D102",  # Missing docstring in public method
+    "D103",  # Missing docstring in public function
+    "D104",  # Missing docstring in public package
+    "D107",  # Mixsing docstring in ...
+
+    # Those ones makes conflict
+    "D203",  # We prefer the other
+    "D213",  # We prefer the other
+
+    # Type annotation: not expecting anything as we don't use them (for now)
+    # We keep ANN enabled as this might spot errors when annotations are used
+    "ANN001",  # Missing type annotation
+    "ANN002",  # Missing type annotation
+    "ANN101",  # Missing type annotation in method
+    "ANN102",  # Missing type annotation in classmethod
+    "ANN201",  # Missing return type annotation
+    "ANN202",  # Missing return type annotation in private function
+    "ANN204",  # Missing return type annotation in special method
+    "ANN206",  # Missing return type annotation in classmethod
+
+]
+
+
+[tool.coverage.run]
+source_pkgs = ["immorep", "tests"]
+branch = true
+parallel = true
+
+
+[tool.pytest.ini_options]
+addopts = [
+    "--import-mode=importlib",
+]
+
+[template.plugins.default]
+tests = true
+src-layout = true

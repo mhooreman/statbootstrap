@@ -1,4 +1,6 @@
-from ._backend import Bootstrap
+# Copyright (C) 2024-Today Michaël Hooreman
+
+from statbootstrap._backend import Bootstrap
 
 
 def bootstrap(x, estimator, confidence=0.95, *, n_boot=10000):

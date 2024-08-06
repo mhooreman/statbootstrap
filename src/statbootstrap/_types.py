@@ -1,3 +1,5 @@
+# Copyright (C) 2024-Today Michaël Hooreman
+
 import typing
 
 
