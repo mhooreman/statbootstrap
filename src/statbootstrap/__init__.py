@@ -1,7 +1,9 @@
 """Implementation of statistical bootstrap."""
 
-from ._frontend import bootstrap
-from ._types import (
+# Copyright (C) 2024-Today Michaël Hooreman
+
+from statbootstrap._frontend import bootstrap
+from statbootstrap._types import (
     BootstrapResults,
     NotVectorizedBootstrapWarning,
     PropertyNotYetSetError,
@@ -9,11 +11,11 @@ from ._types import (
 )
 
 __all__ = [
+    "BootstrapResults",
+    "NotVectorizedBootstrapWarning",
     "PropertyNotYetSetError",
     "SettingReadOnlyPropertyError",
-    "NotVectorizedBootstrapWarning",
-    "BootstrapResults",
     "bootstrap",
 ]
 
-__version__ = "0.1.0"
+__version__ = "0.2.0"

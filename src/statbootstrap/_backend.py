@@ -1,10 +1,12 @@
+# Copyright (C) 2024-Today Michaël Hooreman
+
 import functools
 import warnings
 
 import numpy as np
 import pandas as pd
 
-from ._types import (
+from statbootstrap._types import (
     BootstrapResults,
     NotVectorizedBootstrapWarning,
     PropertyNotYetSetError,
